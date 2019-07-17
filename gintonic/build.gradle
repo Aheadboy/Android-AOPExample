@@ -6,9 +6,13 @@ import org.aspectj.tools.ajc.Main
 buildscript {
   repositories {
     mavenCentral()
+    maven {
+      url 'https://maven.google.com/'
+      name 'Google'
+    }
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:2.1.0'
+    classpath 'com.android.tools.build:gradle:3.2.1'
     classpath 'org.aspectj:aspectjtools:1.8.1'
   }
 }
@@ -17,15 +21,21 @@ apply plugin: 'com.android.library'
 
 repositories {
   mavenCentral()
+  maven {
+    url 'https://maven.google.com/'
+    name 'Google'
+  }
 }
 
 dependencies {
-  compile 'org.aspectj:aspectjrt:1.8.1'
+//  implementation 'org.aspectj:aspectjrt:1.8.1'
+  implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.9.4'
+
 }
 
 android {
-  compileSdkVersion 21
-  buildToolsVersion '21.1.2'
+  compileSdkVersion 28
+  buildToolsVersion '28.0.3'
 
   lintOptions {
     abortOnError false

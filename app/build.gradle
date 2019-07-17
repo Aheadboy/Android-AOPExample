@@ -5,6 +5,10 @@ import org.aspectj.tools.ajc.Main
 buildscript {
   repositories {
     mavenCentral()
+    maven {
+      url 'https://maven.google.com/'
+      name 'Google'
+    }
   }
   dependencies {
     classpath 'org.aspectj:aspectjtools:1.8.1'
@@ -12,28 +16,39 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
-
 repositories {
   mavenCentral()
+  google()
 }
-
+allprojects {
+  repositories {
+    google() // and here
+    jcenter()
+  }
+}
 dependencies {
-  compile project(':gintonic')
-  compile 'org.aspectj:aspectjrt:1.8.1'
+  implementation project(':gintonic')
+//  compile 'org.aspectj:aspectjrt:1.8.1'
+  implementation group: 'org.aspectj', name: 'aspectjrt', version: '1.9.4'
+//  compile group: 'com.android.tools.build', name: 'aapt2', version: '3.4.2-5326820'
 }
 
 android {
-  compileSdkVersion 21
-  buildToolsVersion '21.1.2'
+  compileSdkVersion 28
+  buildToolsVersion '28.0.3'
 
   defaultConfig {
     applicationId 'android10.org.viewgroupperformance'
-    minSdkVersion 15
-    targetSdkVersion 21
+    minSdkVersion 19
+    targetSdkVersion 28
   }
 
   lintOptions {
     abortOnError true
+  }
+  compileOptions {
+    sourceCompatibility 1.8
+    targetCompatibility 1.8
   }
 }
 
